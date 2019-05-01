@@ -1,4 +1,3 @@
-{% load widget_tweaks %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,28 +6,36 @@
     <title>Hello Bulma!</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script  src="https://unpkg.com/jquery@3.4.0/dist/jquery.js"></script>
+    <script  src="https://unpkg.com/intercooler@1.2.2/dist/intercooler.js"></script>
   </head>
   <body>
   <section class="section">
     <div class="container">
-      
+{% block messages %}
+      {% if messages %}
+        <div class="messages columns is-desktop">
+          <div class="column is-4 is-offset-4">
+            {% for message in messages %}
+              <div class="message {% if message.tags %}is-{{ message.tags }}{% endif %}">
+                <div class="message-body">{{ message }}</div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    {% endblock messages %}
+
+
 <div class="columns">
     <div class="column">
     
     
 
-<form action="">
-    {% for field in form1 %}
-    <div class="field">
-        {{field|add_label_class:"label"}}
-        <div class="control">
-            {{ field|add_class:"input" }}
-        </div>
-          <p class="help">
-            {{field.help_text}}
-          </p>
-    </div>
-    {% endfor %}
+<form action="" method="POST">
+    {% csrf_token %} 
+
+    {% include "form.html" with form=form1 %}
     <div class="field">
         <div class="control">
             <button type="submit" class="button is-primary">
@@ -45,19 +52,11 @@
     </div>
     <div class="column">
 
-        <form action="">
+        <form action="" method="POST">
+        {% csrf_token %} 
 
-    {% for field in form %}
-    <div class="field">
-        {{field|add_label_class:"label"}}
-        <div class="control">
-            {{ field|add_class:"input" }}
-        </div>
-          <p class="help">
-            {{field.help_text}}
-          </p>
-    </div>
-    {% endfor %}
+        {% include "form.html" with form=form %}
+    
     <div class="field">
         <div class="control">
             <button type="submit" class="button is-primary">
@@ -73,8 +72,15 @@
 </div>
 
 
+<h1 class="">Address</h1>
 
-
+<ul>
+{% for a in addresses %}
+    <li>
+        {{a.id}} - {{a.street}} {{a.entry.name}}
+    </li>
+{% endfor %}
+</ul>
 
 
     </div>
