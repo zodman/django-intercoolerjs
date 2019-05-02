@@ -14,6 +14,9 @@ class AddressForm(forms.ModelForm):
         model = Address
         exclude = ()
 
+def show_entries(request):
+    context = dict(entries=Entry.objects.all().order_by("-id"))
+    return render(request, "entries.html", context)
 
 def show_addresses(request):
     context = {
