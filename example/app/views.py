@@ -13,13 +13,22 @@ class AddressForm(forms.ModelForm):
     class Meta:
         model = Address
         exclude = ()
-        
+
+
+def show_addresses(request):
+    context = {
+        'addresses': Address.objects.all()
+    }
+    return render(request, "addresses.html",context)
+
 # fix the contrib.messages update
 def show_messages(request):
     return render(request, "_messages.html")
 
 def save_entry(request, form=EntryForm, model="entry"):
     context = {}
+    import time
+    time.sleep(2)
     if request.method == "POST":
         context["form"] = form(request.POST)
         if context["form"].is_valid():

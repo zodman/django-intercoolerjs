@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script  src="https://unpkg.com/jquery@3.4.0/dist/jquery.js"></script>
-    <script  src="https://unpkg.com/intercooler@1.2.2/dist/intercooler.js"></script>
+    <!-- script  src="https://unpkg.com/intercooler@1.2.2/dist/intercooler.js"></script-->
+    <script src="http://localhost:3002/intercooler.js"></script>
   </head>
   <body>
   <section class="section">
@@ -34,9 +35,11 @@
     </div>
     <div class="field">
         <div class="control">
-            <button type="submit" class="button is-primary" ic-post-to="{% url 'save_entry'%}" ic-target="#form-entry">  
-                Enviar
+            <button type="submit" class="button is-primary" ic-indicator=".fa-spinner" ic-post-to="{% url 'save_entry'%}" ic-target="#form-entry">  
+                Enviar 
             </button>    
+                            <i class="fas fa-spinner fa-spin " style="display:none;" ></i>
+
         </div>
     </div>
 
@@ -67,17 +70,8 @@
     </div>
 </div>
 
-
-<h1 class="">Address</h1>
-
-<ul>
-{% for a in addresses %}
-    <li>
-        {{a.id}} - {{a.street}} {{a.entry.name}}
-    </li>
-{% endfor %}
-</ul>
-
+<div class="address" ic-src="{% url 'addresses' %}" ic-trigger-on="load">
+</div>
 
     </div>
   </section>

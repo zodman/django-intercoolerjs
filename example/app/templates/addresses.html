@@ -1,0 +1,10 @@
+
+<h1 class="">Address</h1>
+
+<ul>
+{% for a in addresses %}
+    <li>
+        {{a.id}} - {{a.street}} {{a.entry.name}}
+    </li>
+{% endfor %}
+</ul>
