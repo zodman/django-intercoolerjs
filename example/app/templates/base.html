@@ -12,9 +12,13 @@
   <body>
   <section class="section">
     <div class="container">
+
+{# small hack to fix the messages #}
 {% block messages %}
+<section class="content"  ic-get-from="{% url "messages" %}" ic-deps="*">
     {% include "_messages.html" %}
-    {% endblock messages %}
+</section>
+{% endblock messages %}
 
 
 <div class="columns">
