@@ -13,17 +13,7 @@
   <section class="section">
     <div class="container">
 {% block messages %}
-      {% if messages %}
-        <div class="messages columns is-desktop">
-          <div class="column is-4 is-offset-4">
-            {% for message in messages %}
-              <div class="message {% if message.tags %}is-{{ message.tags }}{% endif %}">
-                <div class="message-body">{{ message }}</div>
-              </div>
-            {% endfor %}
-          </div>
-        </div>
-      {% endif %}
+    {% include "_messages.html" %}
     {% endblock messages %}
 
 
@@ -35,10 +25,12 @@
 <form action="" method="POST">
     {% csrf_token %} 
 
-    {% include "form.html" with form=form1 %}
+    <div id="form-entry">
+        {% include "form.html" with form=form1 %}
+    </div>
     <div class="field">
         <div class="control">
-            <button type="submit" class="button is-primary">
+            <button type="submit" class="button is-primary" ic-post-to="{% url 'save_entry'%}" ic-target="#form-entry">  
                 Enviar
             </button>    
         </div>
